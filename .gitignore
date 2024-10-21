@@ -7,5 +7,5 @@ LLM&RDF.ipynb
 backup_bib.txt
 test_rebel.py
 class_CoreferResolver.py
-
-class_KnowledgeGraphExtractor.py
+class_RDFGrapher.py
+App.py
