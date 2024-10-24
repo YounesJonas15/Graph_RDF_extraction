@@ -3,6 +3,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 
 model = SentenceTransformer("all-MiniLM-L6-v2")
+
 # Charger un modèle plus puissant
 # model = SentenceTransformer('all-MiniLM-L12-v2')
 
@@ -61,21 +62,3 @@ def calcul_metrics(triplets_rebel, triplets_ref):
     precision = correct / nbre_total_rebel
     f1_score = 2 * rappel * precision / (rappel + precision)
     return {"precision": precision, "rappel": rappel, "f1-score": f1_score}
-
-
-triplet_rebel = [
-    ('University of Versailles Saint-Quentin-en-Yvelines', 'country', 'French'),
-    ('University of Versailles Saint-Quentin-en-Yvelines', 'inception', '1991'),
-    ('University of Versailles Saint-Quentin-en-Yvelines', 'located in the administrative territorial entity', 'Yvelines'),
-    ('French', 'contains administrative territorial entity', 'Hauts-de-Seine'),
-    ('department', 'country', 'French'),
-    ('Yvelines', 'country', 'French'),
-    ('Yvelines', 'instance of', 'department'),
-    ('Hauts-de-Seine', 'country', 'French'),
-    ('Hauts-de-Seine', 'instance of', 'department'),
-    ('University of Versailles Saint-Quentin-en-Yvelines', 'parent organization', 'Paris-Saclay University'),
-    ('Paris-Saclay University', 'subsidiary', 'University of Versailles Saint-Quentin-en-Yvelines'),
-    ('University of Versailles Saint-Quentin-en-Yvelines', 'located in the administrative territorial entity', 'Versailles'),
-    ('University of Versailles Saint-Quentin-en-Yvelines', 'instance of', 'universités nouvelles'),
-    ('University of Versailles Saint-Quentin-en-Yvelines', 'located in the administrative territorial entity', 'Saint-Quentin-en-Yvelines')
-]

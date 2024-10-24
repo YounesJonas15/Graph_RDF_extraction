@@ -3,9 +3,10 @@ __pycache__/
 resolved_coref/
 App/
 resultat_graph/
+.idea/
 .env
 LLM&RDF.ipynb
 backup_bib.txt
 test_rebel.py
-class_CoreferResolver.py
-App.py
+
+
