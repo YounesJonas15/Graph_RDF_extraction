@@ -2,6 +2,7 @@ from transformers import pipeline
 import wikipedia
 from SPARQLWrapper import SPARQLWrapper, JSON
 
+
 class KnowledgeGraphExtractor:
     def __init__(self, model_name="Babelscape/rebel-large"):
         # Initialize the triplet extraction pipeline

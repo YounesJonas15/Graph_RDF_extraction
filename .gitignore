@@ -2,10 +2,10 @@ venv/
 __pycache__/
 resolved_coref/
 App/
+resultat_graph/
 .env
 LLM&RDF.ipynb
 backup_bib.txt
 test_rebel.py
 class_CoreferResolver.py
-class_RDFGrapher.py
 App.py
