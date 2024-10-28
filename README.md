@@ -6,10 +6,6 @@
 - [Getting Started](#getting-started)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
 
 ## Overview
 The **Knowledge Graph Extraction Tool** is designed to extract knowledge graphs in RDF (Resource Description Framework) format from textual documents. RDF is a widely adopted standard of the semantic web, providing an efficient and standardized representation of structured data online. This tool aims to transform unstructured textual information into a structured format that is interpretable by machines.
