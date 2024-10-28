@@ -9,6 +9,7 @@ from langchain_core.prompts import PromptTemplate
 
 load_dotenv()
 
+
 def coreference_resolver(text: str) -> str:
     """
     Résout les co-références dans le texte donné en utilisant un modèle de langage.

@@ -11,6 +11,7 @@ import pydotplus
 import tempfile
 import os
 
+
 class RDFGrapher:
     """
     Classe pour gérer la création et la visualisation de graphes RDF.
@@ -50,7 +51,9 @@ class RDFGrapher:
         if self.is_date(element):
             # Si c'est une date valide, on le considère comme un littéral
             date_object = parse(element)
-            date_without_time = date_object.strftime("%Y-%m-%d")  # Format ISO 8601 pour la date
+            date_without_time = date_object.strftime(
+                "%Y-%m-%d"
+            )  # Format ISO 8601 pour la date
             return True
 
         if "http://" in element:
@@ -94,7 +97,9 @@ class RDFGrapher:
         for element in my_set:
             # Vérification si l'élément est une URI
             if self.__is_uri__(element):
-                element_plitted = element.split("/")[-1]  # Extrait le dernier segment de l'URL
+                element_plitted = element.split("/")[
+                    -1
+                ]  # Extrait le dernier segment de l'URL
                 if "http://dbpedia.org" in element:
                     my_dict[element] = self.DB[element_plitted]
                 else:
@@ -169,19 +174,19 @@ class RDFGrapher:
         """
         # Définir le chemin du dossier de sortie
         output_directory = "resultat_graph"
-        
+
         # Créer le dossier s'il n'existe pas déjà
         os.makedirs(output_directory, exist_ok=True)
-        
+
         # Chemin complet du fichier image
         output_file_path = os.path.join(output_directory, f"{image_name}.png")
 
         # Utilisation d'un fichier temporaire pour le graphe
-        with tempfile.NamedTemporaryFile(mode='w', delete=False) as temp_dot:
+        with tempfile.NamedTemporaryFile(mode="w", delete=False) as temp_dot:
             rdf2dot(g, temp_dot)
             temp_dot.flush()
             dg = pydotplus.graph_from_dot_file(temp_dot.name)
-            
+
             # Enregistrer le graphe en image PNG dans le dossier spécifié
             dg.write_png(output_file_path)
 

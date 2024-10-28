@@ -2,16 +2,19 @@
 Ce module fournit la classe KnowledgeGraphExtractor pour extraire des graphes de connaissance 
 en utilisant Spacy et SPARQL.
 """
+
 from SPARQLWrapper import SPARQLWrapper, JSON
 import spacy
 import wikipedia
 import modules.spacy_component
 
+
 class KnowledgeGraphExtractor:
-    """ 
+    """
     Classe permettant d'extraire et d'enrichir des triplets RDF à partir de texte en utilisant
     le modèle REBEL et des requêtes SPARQL sur DBpedia pour enrichir le graphe.
     """
+
     def __init__(self, cpu_or_gpu=-1):
         if cpu_or_gpu not in [-1, 0]:
             raise ValueError("-1 ou 0, nous n'acceptons pas une autre valeur.")
@@ -23,7 +26,7 @@ class KnowledgeGraphExtractor:
             config={
                 "device": cpu_or_gpu,  # Numéro du GPU, -1 pour utiliser le CPU
                 "model_name": "Babelscape/rebel-large",
-            }  # Modèle utilisé, par défaut 'Babelscape/rebel-large' si non spécifié
+            },  # Modèle utilisé, par défaut 'Babelscape/rebel-large' si non spécifié
         )
 
     def extract_triplet(self, texte: str):
@@ -72,7 +75,7 @@ class KnowledgeGraphExtractor:
 
         Args:
             triplet_list (List[Tuple]): Liste de triplets, chaque triplet est une structure
-                                          (head, relation, tail) où `head` et `tail` sont des entités 
+                                          (head, relation, tail) où `head` et `tail` sont des entités
                                           et `relation` est une relation.
 
         Returns:
@@ -109,15 +112,21 @@ class KnowledgeGraphExtractor:
             temp = list(a_tuple)
 
             # Transformation du sujet (head) en URI
-            temp[0] = dictionnaire_uri.get(temp[0].text, temp[0])  # Cherche l'URI du sujet
-            if "http://dbpedia.org/resource/" not in temp[0]:  # Si ce n'est pas une URI DBpedia
+            temp[0] = dictionnaire_uri.get(
+                temp[0].text, temp[0]
+            )  # Cherche l'URI du sujet
+            if (
+                "http://dbpedia.org/resource/" not in temp[0]
+            ):  # Si ce n'est pas une URI DBpedia
                 # Remplacement des espaces et caractères spéciaux par des underscores
                 temp[0] = temp[0].replace(" ", "_").replace("-", "_").replace("'", "")
                 # Ajout du préfixe "http://example.org/" pour former une URI valide
                 temp[0] = "http://example.org/" + temp[0]
 
             # Transformation de l'objet (tail) en URI
-            temp[2] = dictionnaire_uri.get(temp[2].text, temp[2])  # Cherche l'URI de l'objet
+            temp[2] = dictionnaire_uri.get(
+                temp[2].text, temp[2]
+            )  # Cherche l'URI de l'objet
             # Si l'objet fait partie des sujets et n'est pas déjà une URI valide
             if temp[2] in sujets and not temp[2].startswith("http"):
                 # Remplacement des espaces et caractères spéciaux par des underscores
